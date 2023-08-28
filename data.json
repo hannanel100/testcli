@@ -1,6 +1,10 @@
 {
   "todos": [
     {"text": "3", "id": 1, "isCompleted": false},
-    {"text": "2", "id": 2, "isCompleted": false}
+    {"text": "2", "id": 2, "isCompleted": false},
+    {"text": "throw away trash", "id": 3, "isCompleted": false},
+    {"text": "run on the beach", "id": 4, "isCompleted": true},
+    {"text": "make food", "id": 5, "isCompleted": false},
+    {"text": "show sagi", "id": 6, "isCompleted": false}
   ]
 }

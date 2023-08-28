@@ -9,7 +9,6 @@ export default class Add extends Command {
   static flags = {
     // flag with a value (-n, --name=VALUE)
     name: Flags.string({char: 'n', description: 'name to print'}),
-    // flag with no value (-f, --force)
     force: Flags.boolean({char: 'f'}),
   };
 

@@ -1,6 +1,7 @@
 {
   "extends": ["oclif", "oclif-typescript"],
   "rules": {
-    "semi": "off"
+    "semi": "off",
+    "arrow-parens": "off"
   }
 }

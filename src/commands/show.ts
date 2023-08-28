@@ -1,5 +1,6 @@
-import {Command, Flags} from '@oclif/core';
-import {Todo, getData} from '../api';
+import {Command, Flags, ux} from '@oclif/core';
+import {Todo, getData, updateStatus} from '../api';
+import chalk from 'chalk';
 
 export default class Show extends Command {
   static description = 'describe the command here';
@@ -14,13 +15,28 @@ export default class Show extends Command {
   };
 
   public async run(): Promise<void> {
+    // select from inquirer
+    const {default: select} = await import('@inquirer/select')
     const todos: Todo[] = await getData();
-    for (const todo of todos) {
-      this.log(
-        `${todo.id} - ${todo.text} - ${
-          todo.isCompleted ? 'Completed' : 'Not Completed'
-        }`,
-      );
+    const choices = todos.map((todo) => ({
+      name: `${todo.text} - ${todo.isCompleted ? 'Completed' : 'Not Completed'}`,
+      value: todo.id,
+    }));
+    const id = await select({
+      message: 'Select a todo to update',
+      choices,
+    });
+
+    ux.action.start('Updating todo');
+    // console.log(id)
+    const res: {id: number, success: boolean} = await updateStatus(id);
+    if (res.success) {
+      // get todos id in todos array
+      const todosId = todos.findIndex((todo) => todo.id === res.id);
+      todos[todosId].isCompleted = !todos[todosId].isCompleted;
+      ux.action.stop(chalk.green(`${todos[todosId].text} updated successfully ${todos[todosId].isCompleted ? 'now Completed' : 'now Not Completed'}}`));
+    } else {
+      ux.action.stop(chalk.red('Failed to update todo'));
     }
   }
 }

@@ -17,10 +17,13 @@
     "/oclif.manifest.json"
   ],
   "dependencies": {
+    "@inquirer/select": "^1.2.9",
     "@oclif/core": "^2",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^3.2.6",
-    "chalk": "^4.1.2"
+    "@types/inquirer": "^9.0.3",
+    "chalk": "^4.1.2",
+    "inquirer": "^9.2.10"
   },
   "devDependencies": {
     "@oclif/test": "^2.4.5",
